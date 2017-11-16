@@ -107,7 +107,7 @@ class DataFrameIndexing(object):
 
         # duptes
         self.idx_dupe = (np.array(range(30)) * 99)
-        self.df3 = DataFrame({'A': ([0.1] * 1000), 'B': ([1] * 1000),})
+        self.df3 = DataFrame({'A': ([0.1] * 1000), 'B': ([1] * 1000), })
         self.df3 = concat([self.df3, (2 * self.df3), (3 * self.df3)])
 
         self.df_big = DataFrame(dict(A=(['foo'] * 1000000)))
@@ -148,7 +148,8 @@ class IndexingMethods(object):
         self.s = Series(np.random.rand(100000))
         self.ts = Series(np.random.rand(100000),
                          index=date_range('2011-01-01', freq='S', periods=100000))
-        self.indexer = ([True, False, True, True, False] * 20000)
+        # GH 18000
+        self.indexer = list(np.random.randint(0, 100000, size=100000))
 
     def time_get_loc_float(self):
         self.ind.get_loc(0)
